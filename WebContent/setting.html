@@ -1,0 +1,47 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>车大邦</title>
+<link href="css/jquery.mobile-1.3.2.css" rel="stylesheet" type="text/css"/>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/jquery.mobile-1.3.2.js" type="text/javascript"></script>
+</head>
+<script>	
+	function login(){
+		if($('#userName').val()==''){
+			alert("请输入密码");
+			return false;
+		}
+		if($('#passWd').val()==''){
+			alert("请输入密码");
+			return false;
+		}
+		$('#login').attr('href','#page2');
+
+	}
+</script> 
+<body>
+
+<div data-role="page" id="page">
+	<div data-role="header" data-theme="b" data-position="fixed">
+    	<a data-transition="slide" data-direction="reverse" data-role="button" data-icon="arrow-l" data-iconpos="left" href="#page" data-inline="true">返回</a>
+		<h1>设置</h1>
+	</div>
+	<div data-role="content">	
+		<ul data-role="listview">
+			<li><a data-transition="slide" href="myAccount.html">我的账号</a></li>
+            <li><a data-transition="slide" href="problem.html">常见问题</a></li>
+			<li><a data-transition="slide" href="answerProblem.html">意见或反馈</a></li>
+            <li><a data-transition="slide" href="#page0">退出登录</a></li>
+            <li><a data-transition="slide" href="#">彻底关闭程序</a></li>
+            <li><a data-transition="slide" href="aboutCDB.html">关于车大邦</a></li>
+		</ul>
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<h4>车大邦</h4>
+	</div>
+</div>
+
+</body>
+</html>
