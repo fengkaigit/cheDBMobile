@@ -34,7 +34,9 @@
 			success: function(json){
 				if (json.ok){
 					window.localStorage.setItem("carLogin","succ");
-					$.mobile.changePage("setting.html");
+					window.localStorage.setItem("carName",name);
+					window.localStorage.setItem("carPwd",pwd);
+					$.mobile.changePage("setting.html",{transition: "slide"});
 				}
 				else{
 					window.localStorage.setItem("carLogin","fail");
@@ -50,11 +52,14 @@
 			}
 		})
 	}
+	function register(){
+		$.mobile.changePage("register.html",{transition: "slide"});
+	}
 </script> 
 	<div data-role="header" data-theme="b" data-position="fixed">
     	<a data-transition="slide" data-direction="reverse" data-role="button" data-icon="arrow-l" data-iconpos="left" href="#" data-rel="back" data-inline="true">返回</a>
 		<h1>用户登录</h1> 
-        <a data-transition="slide" data-role="button" data-icon="arrow-r" data-iconpos="right" href="#page13" data-inline="true">注册</a>
+        <a data-transition="slide" data-role="button" data-icon="arrow-r" data-iconpos="right" href="#" onClick="register();" data-inline="true">注册</a>
 	</div>
 	<div data-role="content" >	
 		<fieldset data-role="controlgroup" > 
