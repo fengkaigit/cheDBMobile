@@ -1,0 +1,117 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>车大邦</title>
+<link href="css/jquery.mobile-1.3.2.css" rel="stylesheet" type="text/css"/>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/jquery.mobile-1.3.2.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div data-role="page" id="page">
+<script>
+	$(document).ready(function(){
+		$.ajax({
+			type: "POST",
+			async: false,
+			url: "http://localhost:8080/cheDBService/getUserNewNo.do?type=1",
+			dataType:"jsonp",
+			jsonp:"callback",
+			jsonpCallback:"call",
+			success: function(json){
+				$('#account').val(json);
+			}
+		})
+	})
+	function register(){
+		if($('#userName').val()==''){
+			alert("请输入用户名");
+			return false;
+		}
+		if($('#passWd').val()==''){
+			alert("请输入密码");
+			return false;
+		}
+		//$('#login').attr('href','#page2');
+		var appId = $('#account').val();
+		var userInfo = new Object();
+		userInfo.name = $('#userName').val();
+		userInfo.passwd = $('#passWd').val();
+		userInfo.phone = $('#phone').val();
+		userInfo.no = appId;
+		userInfo.level = 1;
+		var userInfoStr = JSON.stringify(userInfo);
+		var url="http://localhost:8080/cheDBService/registerUser.do?appId="+appId+"&userInfo="+userInfoStr+"&callback=call";
+		$.ajax({
+			type: "POST",
+			async: false,
+			url: url,
+			dataType:"jsonp",
+			jsonp:"callback",
+			jsonpCallback:"call",
+			success: function(json){
+				if (json='success'){
+					window.localStorage.setItem("carLogin","succ");
+					alert("注册成功");
+					$.mobile.changePage("setting.html",{transition: "slide"});
+				}else{
+					window.localStorage.setItem("carLogin","fail");
+				}
+			}
+		})
+	}
+	function changeNo(){
+		$.ajax({
+			type: "POST",
+			async: false,
+			url: "http://localhost:8080/cheDBService/getUserNewNo.do?type=1",
+			dataType:"jsonp",
+			jsonp:"callback",
+			jsonpCallback:"call",
+			success: function(json){
+				$('#account').val(json);
+			}
+		})
+	}
+	function showT(){
+		document.getElementById("phoneT").style.display="block";
+	}
+</script> 
+	<div data-role="header" data-theme="b" data-position="fixed">
+    	<a data-transition="slide" data-direction="reverse" data-role="button" data-rel="back" data-icon="arrow-l" data-iconpos="left" data-inline="true">返回</a>
+		<h1>注册</h1>
+    </div>
+    <div data-role="content">
+    	
+         <div data-role="none">
+         <div class="ui-grid-a" >
+            	<div class="ui-block-a"><label>账号：</label><input id="account" disabled/></div>
+                <div class="ui-block-b"> <a data-role="button" data-inline="true" style="background:#360; color:#FFF; float:right;" onClick="changeNo();">换一个</a></div></div>
+    	<fieldset data-role="controlgroup" > 
+        	
+        	<input placeholder="用户名(随便起)" value="" type="text" id="userName" />
+            
+            <input placeholder="密码" type="password" id="passWd"/>
+            <input placeholder="手机号(可不输)" type="text" id="phone"/>
+            <br>
+            <a id="reg" data-role="button" href="#" onClick="register();">注册</a>
+        </fieldset>
+        <a style="color:#090;text-decoration:none; font-size:12px" onclick="showT();">输入手机号能干什么？</a>
+        <div id="phoneT" style="display:none">
+        <br>
+        <span style="font-size:12px">可以找回被遗忘的密码，也可以不输。</span>
+        <br>
+        <span style="font-size:12px">你输入了也请放心！绝不会泄漏。</span>
+        <br>
+        <br>
+        <br>
+        </div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+    	<h4>车大邦</h4>
+    </div>
+</div>
+
+</body>
+</html>
