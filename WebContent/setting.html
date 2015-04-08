@@ -7,23 +7,22 @@
 <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/jquery.mobile-1.3.2.js" type="text/javascript"></script>
 </head>
-<script>	
-	function login(){
-		if($('#userName').val()==''){
-			alert("请输入密码");
-			return false;
-		}
-		if($('#passWd').val()==''){
-			alert("请输入密码");
-			return false;
-		}
-		$('#login').attr('href','#page2');
-
-	}
-</script> 
 <body>
-
 <div data-role="page" id="page">
+	<script>
+		$(document).ready(function(){
+			var succ = localStorage.getItem("carLogin");
+			if (succ=='succ'){
+				document.getElementById("feedback").style.display="block";
+				document.getElementById("logout").style.display="block";
+				document.getElementById("loginb").style.display="none";
+			}else{
+				document.getElementById("feedback").style.display="none";
+				document.getElementById("logout").style.display="none";
+				document.getElementById("loginb").style.display="block";
+			} 
+		});
+	</script> 
 	<div data-role="header" data-theme="b" data-position="fixed">
     	<a data-transition="slide" data-direction="reverse" data-role="button" data-icon="arrow-l" data-iconpos="left" href="#page" data-inline="true">返回</a>
 		<h1>设置</h1>
@@ -32,8 +31,9 @@
 		<ul data-role="listview">
 			<li><a data-transition="slide" href="myAccount.html">我的账号</a></li>
             <li><a data-transition="slide" href="problem.html">常见问题</a></li>
-			<li><a data-transition="slide" href="answerProblem.html">意见或反馈</a></li>
-            <li><a data-transition="slide" href="#page0">退出登录</a></li>
+						<li id="feedback" style="display:none"><a data-transition="slide" href="#page6">意见或反馈</a></li>
+            <li id="logout" style="display:none"><a data-transition="slide" onclick="logout();" href="#">退出登录</a></li>
+            <li id="loginb" style="display:block"><a data-transition="slide" href="#">登录</a></li>
             <li><a data-transition="slide" href="#">彻底关闭程序</a></li>
             <li><a data-transition="slide" href="aboutCDB.html">关于车大邦</a></li>
 		</ul>
