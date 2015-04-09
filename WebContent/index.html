@@ -40,7 +40,12 @@
 	function myCheck(page){
 		var succ = window.localStorage.getItem("carLogin");
 		if (succ=='succ'){
-			$.mobile.changePage(page,{transition: "slide"});
+			if (page=='myOrder.html'){
+				var doc=document.getElementById("myOrder");
+				doc.setAttribute("href",page);
+			}
+			else
+				$.mobile.changePage(page,{transition: "slide"});
 		}else{
 			$.mobile.changePage("login.html",{transition: "slide"});
 		}
@@ -66,7 +71,7 @@
         <div class="ui-block-c"><a data-transition="slide" style="background-color:#8A95FF; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#"onclick="myCheck('myOrder','#')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/baoyang.png" />保养</a></div>
         <div class="ui-block-a"><a data-transition="slide" style="background-color:#FF7081; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#"onclick="myCheck('myOrder','#')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/luntai.png" />检测</a></div>
         <div class="ui-block-b"><a data-transition="slide" style="background-color:#01BCE4; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#"onclick="myCheck('myOrder','#')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/car_check.png" />轮胎</a></div>
-        <div class="ui-block-c"><a id="myOrder" data-transition="slide" style="background-color:#82A8FF; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#" onclick="myCheck('myOrder.html')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/recordlist.png" data-inset="true"/>我的订单</a></div>
+        <div class="ui-block-c"><a id="myOrder" data-ajax="false" data-transition="slide" style="background-color:#82A8FF; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#" onclick="myCheck('myOrder.html')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/recordlist.png" data-inset="true"/>我的订单</a></div>
     </div>
     <a id="setting" data-transition="slide" style="margin-right:0.6em; float:right;" href="#" onclick="myCheck('setting.html')"><img src="images/drawable-hdpi/ofm_setting_icon.png"></a>
 </div>

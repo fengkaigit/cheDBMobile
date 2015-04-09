@@ -23,7 +23,7 @@
 		//$('#login').attr('href','#page2');
 		var name = $('#userName').val();
 		var pwd = $('#passWd').val();
-		var url = "http://localhost:8080/cheDBService/Login.do?userNo="+name+"&password="+pwd+"&type=2&callback=call";
+		var url = "http://localhost:8080/cheDBService/Login.do?userNo="+name+"&password="+pwd+"&type=1&callback=call";
 		$.ajax({
 			type: "POST",
 			async: false,
@@ -33,6 +33,7 @@
 			jsonpCallback:"call",
 			success: function(json){
 				if (json.ok){
+					window.localStorage.clear();
 					window.localStorage.setItem("carLogin","succ");
 					window.localStorage.setItem("carName",name);
 					window.localStorage.setItem("carPwd",pwd);
