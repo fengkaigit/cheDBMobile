@@ -10,27 +10,23 @@
 <body>
 
 <div data-role="page" id="page">
-<script>
-	function version(){
-		$.mobile.changePage("aboutVersion.html",{transition: "slide"})
-	}
-	function aFunction(){
-		$.mobile.changePage("aboutFunction.html",{transition: "slide"})
-	}
-	function aSoft(){
-		$.mobile.changePage("aboutSoft.html",{transition: "slide"})
-	}
-</script>
 	<div data-role="header" data-theme="b" data-position="fixed">
     	<a data-transition="slide" data-direction="reverse" data-role="button" data-rel="back" data-icon="arrow-l" data-iconpos="left" data-inline="true">返回</a>
-		<h1>关于车大邦</h1>
+		<h1>版本更新</h1>
 	</div>
     <div data-role="content">
-    	<ul data-role="listview">
-        	<li><a data-transition="slide" href="#" data-role="none" onClick="version();">版本更新</a></li>
-            <li><a data-transition="slide" href="#" data-role="none" onClick="aFunction();">软件功能</a></li>
-            <li><a data-transition="slide" href="#" data-role="none" onClick="aSoft();">关于本应用</a></li>
-        </ul>
+        <p>当前就是最新版本。版本号3.8.5</p>
+        <a data-role="button" href="#">一键更新</a>
+        <br>
+        <h3>下一版本要加的功能</h3>
+        <p>1、违章免费查询功能；</p>
+        <p>2、天气预报；</p>
+        <p>3、车主或商家可以统计自己的开销或业务；</p>
+        <p>4、商家可以给车主发送服务信息或回访；</p>
+        <p>敬请期待</p>
+        <br>
+        <h3>你有什么建议或想使用的功能，可在“意见反馈”中告诉我们。</h3>
+        <br>
     </div>
     <div data-role="footer" data-position="fixed">
 		<h4>车大邦</h4>

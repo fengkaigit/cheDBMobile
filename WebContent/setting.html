@@ -40,6 +40,9 @@
 		function login(){
 			$.mobile.changePage("login.html",{transition: "slide"});
 		}
+		function feedback(){
+			$.mobile.changePage("feedback.html",{transition: "slide"});
+		}
 	</script> 
 	<div data-role="header" data-theme="b" data-position="fixed">
     	<a data-transition="slide" data-direction="reverse" data-role="button" data-icon="arrow-l" data-iconpos="left" href="#page" data-inline="true">返回</a>
@@ -49,7 +52,7 @@
 		<ul data-role="listview">
 			<li><a data-transition="slide" href="#" onClick="myAccount();">我的账号</a></li>
             <li><a data-transition="slide" href="#" onClick="myQuestry();">常见问题</a></li>
-			<li id="feedback" style="display:none"><a data-transition="slide" href="#">意见或反馈</a></li>
+			<li id="feedback" style="display:none"><a data-transition="slide" href="#" onClick="feedback();">意见或反馈</a></li>
             <li id="logout" style="display:none"><a data-transition="slide" onclick="logout();" href="#">退出登录</a></li>
             <li id="loginb" style="display:block"><a data-transition="slide" href="#" onClick="login();">登录</a></li>
             <li><a data-transition="slide" href="#" onclick="closeApp();">彻底关闭程序</a></li>
