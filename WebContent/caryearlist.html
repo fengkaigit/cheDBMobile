@@ -1,0 +1,60 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width,height=device-height,initial-scale=1, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>车大邦</title>
+<link href="css/jquery.mobile-1.3.2.css" rel="stylesheet" type="text/css"/>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/jquery.mobile-1.3.2.js" type="text/javascript"></script>
+</head>
+<body>
+	<div data-role="page" id="caryearpage">
+		<div data-role="header" data-position="fixed" data-theme="b">
+			<a data-transition="slide" data-direction="reverse"
+				data-role="button" data-icon="arrow-l" data-iconpos="left" href="#"
+				data-rel="back" data-inline="true">返回</a>
+			<h1>选择出厂日期</h1>
+		</div>
+		<div data-role="content">
+			<div id="caryearlsit" style="padding-left: 5px; padding-right: 5px;">
+			</div>
+			<div class="m10">没有您要的出厂日期？请在公众号留言我们尽快加上</div>
+		</div>
+		<div data-role="footer" data-position="fixed" data-theme="b">
+			<h4>车大邦</h4>
+		</div>
+		<link href="css/main.css" rel="stylesheet" type="text/css" />
+		<script src="js/common.js" type="text/javascript"></script>
+		<script>
+		  $("#caryearpage").on("pageshow",function(){
+			//if (navigator.userAgent.indexOf("Android") != -1) {
+				//$.mobile.defaultPageTransition = 'none';
+				//$.mobile.defaultDialogTransition = 'none';
+			//}
+			showLoadMsg();
+		    var url = "queryCarYearListBySerise.do?carId="+sessionStorage.caryearId;
+		    ajaxGet(url,function(data){
+		    	   var temp = [];
+				   if(data.length > 0){
+					   var len = data.length;
+					   for(var i =0;i<len;i++){
+						   temp.push('<div class="yearItem" onclick="javascript:queryserviceByCarId(\''+data[i].id+'\')">'+data[i].name+'</div>');
+					   }
+				   }
+				   temp.push('<div class="yearItem" style="background: none"></div>');
+				   $('#caryearlsit').html(temp.join(""));
+				   hideLoadMsg();
+		    });
+		    
+	    });
+		  function test4(carid){
+			  alert(carid);
+		  }
+		</script>
+	</div>
+</body>
+</html>

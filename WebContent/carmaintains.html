@@ -1,0 +1,198 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>车大邦</title>
+<link href="css/jquery.mobile-1.3.2.css" rel="stylesheet" type="text/css"/>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/jquery.mobile-1.3.2.js" type="text/javascript"></script>
+</head>
+<body>
+	<div data-role="page" id="carmainpage">
+		<div data-role="header" data-position="fixed" data-theme="b">
+			<a data-transition="slide" data-direction="reverse"
+				data-role="button" data-icon="arrow-l" data-iconpos="left" href="#"
+				data-rel="back" data-inline="true">&lt;保养</a>
+			<h1>汽车常规保养</h1>
+		</div>
+		<div data-role="content">        
+			<div style="padding-left: 5px; padding-right: 5px;">
+				<div class="card1">
+					<div class="cardTitle tact">选择车型</div>
+					<!-- 				<div class=" m10"> -->
+					<div style="margin-left: 10px;">
+							<div class="cardLayer" id="selectedcar1">
+							</div>
+						<div class="cardLayer" style="padding-top: 10px;"
+							id="selectedcar2">
+							<table width="100%" class="layoutTbl">
+								<tr>
+									<td>&nbsp;<span class="greyText">选择车型，查看可做的项目</span></td>
+									<td width="80" style="text-align: right;"><a
+											data-role="button" href="javascript:querybrand(1);">选择车型</a></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!--  -->
+				<div class="card1">
+					<div class="cardTitle tact">推荐项目</div>
+					<div id="mileagediv1" style="padding-left:5px;">
+						<table width="100%" class="layoutTbl">
+							<tr>
+								<td><div id="mileage">当前里程</div></td>
+								<td width="100" style="text-align: right;"><a
+										data-role="button" onclick="javascript:recommendservice();">推荐项目</a></td>
+							</tr>
+						</table>
+						<input type="range" name="points" id="points" value="0" min="0" max="150000" data-highlight="true" step="1000" onchange="changelc(this.value)" />
+					</div>
+					<div class="cardLayer" id="recommend"></div>
+					<div
+						style="text-align: left; font-size: 15px; padding-bottom: 5px; padding-left: 5px;"
+						id="recommendmess"></div>
+				</div>
+				<div class="card1" id="carmainlist">
+				</div>
+				<div class="listBox">
+					<p>以独有的模式提供比目前更高品质的汽车保养服务</p>
+					<p>1、集中采购统一配送油品和配件，省去中间环节，做到了品质高价格低;</p>
+					<p>2、严谨的工序和监督反馈机制保证商家的每步工作都执行到位;</p>
+					<p>3、根据官方保养手册推荐当前需要做的保养项目，车主省心又放心;</p>
+				</div>
+
+				<div class="m10">
+					<div class="greyText">在车大邦平台上网，如出现任何问题，车大邦负责协调解决。</div>
+				</div>
+			</div>
+		</div>
+		<div data-role="footer" data-position="fixed" data-theme="b">
+			<h4>车大邦</h4>
+		</div>
+		<input type="hidden" id="carId" value="" />
+		<link href="css/main.css" rel="stylesheet" type="text/css" />
+		<script src="js/common.js" type="text/javascript"></script>		
+		<script>
+			$("#carmainpage").on("pageshow",function(){
+				//if (navigator.userAgent.indexOf("Android") != -1) {
+					//$.mobile.defaultPageTransition = 'none';
+					//$.mobile.defaultDialogTransition = 'none';
+				//}
+				showLoadMsg();
+			    var url = "queryChoosedCarItemByUser.do?userId="+window.localStorage.carName+"&classId="+sessionStorage.classId;
+			    ajaxGet(url,function(data){
+			    	 if(data.length > 0){
+			    		 var obj = data[0];
+			    		 $("#selectedcar1").html(obj.name);
+			    		 $("#carId").val(obj.id);
+			    		 queryservice(obj.id);
+			    	 }
+			    });
+		    });
+		
+	    function queryservice(carId){
+	    	var url = "queryServiceList.do?serviceClassId="+sessionStorage.classId+"&carId="+carId;
+		    ajaxGet(url,function(data){
+		    	   var temp = [];
+		    	   temp.push('<div class="cardTitle tact">可选项目</div>');
+				   if(data.length > 0){
+					   for(var key in data){
+						   var obj = data[key];
+					       temp.push('<div class="cardLayer">');
+					       temp.push('<div class="m10">');
+					       temp.push('<a href="javascript:queryservicedetail(\''+obj.serviceId+'\')" style="color: #000; text-decoration: none;"><div class="brandItem">'+obj.name+'</div>');
+					       temp.push('<table width="100%">');
+					       if(obj.item1ClassTxt!=null&&obj.item1ClassTxt!=''&&obj.item1ClassTxt!='null'){
+					    	   temp.push('<tr><td><span class="greyText" style="padding: 0px;">'+obj.item1ClassTxt+'</span></td><td></td><td></td></tr>');  
+					       }
+					       if(obj.item2ClassTxt!=null&&obj.item2ClassTxt!=''&&obj.item2ClassTxt!='null'){
+					    	   temp.push('<tr><td><span class="greyText" style="padding: 0px;">'+obj.item2ClassTxt+'</span></td><td></td><td></td></tr>');  
+					       }
+					       if(obj.item3ClassTxt!=null&&obj.item3ClassTxt!=''&&obj.item3ClassTxt!='null'){
+					    	   temp.push('<tr><td><span class="greyText" style="padding: 0px;">'+obj.item3ClassTxt+'</span></td><td></td><td></td></tr>');  
+					       }
+					       if(obj.item4ClassTxt!=null&&obj.item4ClassTxt!=''&&obj.item4ClassTxt!='null'){
+					    	   temp.push('<tr><td><span class="greyText" style="padding: 0px;">'+obj.item4ClassTxt+'</span></td><td></td><td></td></tr>');  
+					       }
+					       temp.push('<tr><td><span class="redText">￥'+obj.priceOnline+'元</span><del>￥'+obj.priceOld+'元</del></td><td></td><td></td></tr>');
+					       temp.push('</table>');
+					       temp.push('</a>')
+					       temp.push('</div>');
+					       temp.push('</div>');
+					   }
+					  
+				   }else{
+					   temp.push('<div class="cardLayer"><div class="m10"><span class="greyText">该车型没有可选项目</span></div></div>');
+				   }
+				 
+				   $('#carmainlist').html(temp.join(""));
+				   //$('#tyreservicelist').trigger('create');
+				   hideLoadMsg();
+		    });
+	    }
+		function queryservicedetail(serviceid){
+			sessionStorage.serviceid=serviceid;
+			onTargetPage("maintainitems.html","slide",false);
+		}
+		function querybrand(){
+			onTargetPage("carbrandlist.html","slide",false);
+		}
+		function changelc(value){
+			$('#mileage').html(value+'公里');	
+		}
+		function recommendservice(){
+			var url = "recommendService.do?classId="+sessionStorage.classId+"&yearid="+$("#carId").val()+"&moverange="+$("#points").val();
+		    ajaxGet(url,function(data){
+		    	var html = '';
+				for (i in data) {
+					html = html
+							+ '<div class="m10"><a href="javascript:queryservicedetail(\''
+							+ data[i].serviceId
+							+ '\')" style="color: #000; text-decoration: none;">'
+							+ '<div class="brandItem">' + data[i].name
+							+ '</div>' + '<table style="width: 100%;">'
+							+ '<tbody>';
+					if (data[i].item1ClassTxt != null) {
+						html = html
+								+ '<tr><td><span class="greyText" style="padding: 0px;">'
+								+ data[i].item1ClassTxt + '</span></td>'
+								+ '<td></td><td></td></tr>';
+					}
+					if (data[i].item2ClassTxt != null) {
+						html = html
+								+ '<tr><td><span class="greyText" style="padding: 0px;">'
+								+ data[i].item2ClassTxt + '</span></td>'
+								+ '<td></td><td></td></tr>';
+					}
+					if (data[i].item3ClassTxt != null) {
+						html = html
+								+ '<tr><td><span class="greyText" style="padding: 0px;">'
+								+ data[i].item3ClassTxt + '</span></td>'
+								+ '<td></td><td></td></tr>';
+					}
+					if (data[i].item4ClassTxt != null) {
+						html = html
+								+ '<tr><td><span class="greyText" style="padding: 0px;">'
+								+ data[i].item4ClassTxt + '</span></td>'
+								+ '<td></td><td></td></tr>';
+					}
+					html = html
+							+ '<tr><td class="redText">￥'
+							+ data[i].priceOnline
+							+ '元</td><td></td><td></td></tr></tbody></table></a></div>'
+				}
+				$('#recommend').html(html);
+				if (data != null && data.length > 0) {
+					$('#recommendmess').text(data[0].message);
+				}
+		    });
+		}
+		</script>
+	</div>
+</body>
+</html>

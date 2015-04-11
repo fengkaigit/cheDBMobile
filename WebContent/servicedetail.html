@@ -1,0 +1,144 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width,height=device-height,initial-scale=1, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>车大邦</title>
+<link href="css/jquery.mobile-1.3.2.css" rel="stylesheet" type="text/css"/>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/jquery.mobile-1.3.2.js" type="text/javascript"></script>
+<script src="js/servicedetail.js" type="text/javascript"></script>
+</head>
+<body>
+	<div data-role="page" id="providerpage">
+		<div data-role="header" data-position="fixed" data-theme="b">
+			<a data-transition="slide" data-direction="reverse"
+				data-role="button" data-icon="arrow-l" data-iconpos="left" href="#"
+				data-rel="back" data-inline="true">&lt;商家<span id="providerId"></span></a>
+			<h1></h1>
+		</div>
+		<div data-role="content">
+			<div id="detailinfo"
+				style="display: block; padding-left: 6px; padding-right: 6px;">
+				<h3 class="h31" id="providerTitle">
+				</h3>
+				<div id="summary">
+				</div>
+				<div style="padding-top: 15px;">
+					<table class="layoutTbl" width="100%">
+						<tr>
+							<td class="">地址：<span id="addr"></span>
+							</td>
+							<td width="100" id="mapnav"></td>
+						</tr>
+						<tr>
+							<td class="">电话: <span id="phone"></span>
+							</td>
+							<td width="100" id="telquery"></td>
+						</tr>
+					</table>
+				</div>
+				<div class="listBox" style="margin-top: 10px; line-height: 200%">
+					综合打分：<span class="redText" id="score"></span><br />
+					商家人气：<span class=" redText" id="business"></span>
+				</div>
+				<div class="m10" id="imglist">
+					
+				</div>
+				<div id="remark">
+				</div>
+				<hr class="seperator" />
+				<h3 class="h31">服务项目</h3>
+				<div id="providerItemlist"></div>
+			
+			</div>
+		</div>
+		<div data-role="footer" data-position="fixed" data-theme="b">
+			<h4>车大邦</h4>
+		</div>
+		<link href="css/main.css" rel="stylesheet" type="text/css" />
+		<script src="js/common.js" type="text/javascript"></script>
+		<script>
+		
+			$("#providerpage").on("pageshow",function(){
+				//if (navigator.userAgent.indexOf("Android") != -1) {
+					//$.mobile.defaultPageTransition = 'none';
+					//$.mobile.defaultDialogTransition = 'none';
+				//}
+				showLoadMsg();
+			    var url = "provider/queryProviderById.do?providerId="+sessionStorage.providerId;
+			    ajaxGet(url,function(data){
+			    	    if(data!=null){
+			    	    	 $("#providerId").html(data.providerId);
+			    	    	 $("#providerTitle").html(data.title);
+			    	    	 $("#summary").html(data.summary);
+			    	    	 $("#addr").html(data.addr);
+			    	    	 $("#phone").html(data.phone);
+			    	    	 $("#mapnav").html('<a data-role="button"  onclick="javascript:showmap('+data.providerId+')">地图导航</a>');
+			    	    	 $("#telquery").html('<a data-role="button"  onclick="tel:'+data.phone+'">电话咨询</a>');
+			    	    	 $("#mapnav").trigger('create');
+			    	    	 $("#telquery").trigger('create');
+			    	    	 $("#scope").html(data.scope);
+			    	    	 $("#remark").html(data.remark);
+			    	    	 $("#business").html(data.business+'次成效/'+data.browse+'次浏览');
+			    	    	 if(data.imgIdListStr!=''){
+			    	    		 var imglist = data.imgIdListStr.split(",");
+			    	    		 var imgAry = [];
+			    	    		 for(var k in imglist){
+			    	    			 imgAry.push('<a href="#"><img src="'+localStorage.serverUrl+'img/provider/'+data.providerId+'/'+imglist[k]+'.jpg" width="55" height="65"/></a>');
+			    	    		 }
+			    	    		 $("#imglist").html(imgAry.join(""));
+			    	    	 }else{
+			    	    		 $("#imglist").html('<img src="'+localStorage.serverUrl+'img/ic_launcher.png" />');
+			    	    	 }
+			    	    	 queryProviderItem(data.providerId);
+			    	    }
+			    });
+		    });
+		
+	    function queryProviderItem(providerId){
+	    	var url = "queryProviderItemByProviderId.do?mode=0"+"&providerId="+providerId+"&priceStart=-1"+"&priceEnd=-1";
+		    ajaxGet(url,function(data){
+		    	   var temp = [];
+				   if(data.length > 0){
+					   for(var key in data){
+						   var obj = data[key];
+					       temp.push('<a href="#" style="text-decoration: none; color: #000;"><div class="listBox"><span class="textIcon">');
+					       temp.push(obj.sysItemName+'</span>');
+					       temp.push(obj.title);
+					       temp.push('<table class="layoutTbl" width="100%">');
+					       temp.push('<tr><td colspan="2"><div class="greyText" style="font-size: 15px;">');  
+					       temp.push(obj.summary+'</div></td></tr>');
+					       temp.push('<tr><td class=" greenText"></td><td width="210" class="greenText" style="font-size: 15px; text-align: right">');
+					       if(obj.price!=null&&obj.price!=0){
+					    	   temp.push('￥'+obj.priceStr);  
+					       }
+					       if(obj.priceOld!=null&&obj.priceOld!=''){
+					    	   temp.push('(原价'+obj.priceOldStr+'元)');  
+					       }
+					       if(obj.price==null||obj.price!==0){
+					    	   temp.push('还未定价</td></tr></table></div></a>');  
+					       }
+					   }
+					  
+				   }
+				   $('#providerItemlist').html(temp.join(""));
+				   //$('#tyreservicelist').trigger('create');
+				   hideLoadMsg();
+		    });
+	    }
+		function queryserviceitemdetail(provideritemid){
+			sessionStorage.serviceid=serviceid;
+			onTargetPage("maintainitems.html","slide",false);
+		}
+		function showmap(providerId){
+			sessionStorage.providerId=providerId;
+			onTargetPage("loadmapprovider.html","slide",false);
+		}
+		</script>
+	</div>
+</body>
+</html>

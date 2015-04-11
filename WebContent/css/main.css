@@ -1,0 +1,308 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	margin: 0px 0px;
+	display: block;
+}
+
+.greenBtn {
+	background: #390;
+	border: none;
+	border-radius: 3px;
+	color: white;
+	line-height: 150%;
+	font-size: 15px;
+}
+
+.greenBtn2 {
+	background: #6c0;
+	border: none;
+	border-radius: 3px;
+	color: white;
+	line-height: 150%;
+}
+
+.greenBtn3 {
+	background: #390;
+	border: none;
+	border-radius: 3px;
+	color: white;
+	line-height: 150%;
+	height: 3em;
+	width: 20em;
+}
+
+input.plain {
+	border: solid 1px;
+	border-color: #ccc;
+	width: 80px;
+	background-color: transparent;
+}
+
+.androidInputBtnBorder {
+	border: solid 1px #ccc;
+	border-top: none;
+	height: 3px;
+	font-size: 3px;
+}
+
+.textIcon {
+	display: inline-block;
+	line-height: 150%;
+	color: white;
+	background: #bbb;
+	border-radius: 3px;
+	padding: 0 10px;
+	font-size: 16px;
+}
+
+.textIconActive {
+	display: inline-block;
+	line-height: 150%;
+	color: white;
+	background: #390;
+	border-radius: 3px;
+	padding: 0 10px;
+}
+
+.iconWrapper {
+	padding: 0.5em 2em;
+	line-height: 200%
+}
+
+.tact {
+	text-align: center;
+}
+
+.tart {
+	text-align: left;
+	font-size: 18px;
+}
+
+.textright {
+	text-align: right;
+	font-size: 18px;
+}
+
+.bluLbl {
+	background: #ddf;
+	line-height: 150%;
+	padding: 0em 1.5em;
+	font-size: 18px;
+}
+
+table.layoutTbl {
+	border: none;
+}
+
+table.layoutTbl td {
+	border: none;
+	font-size: 16px;
+	height: 18px;
+}
+
+.navBar {
+	background: #390;
+	font-size: 18px;
+	/* 	line-height: 200%; */
+	color: white;
+	height: 30px;
+	padding-top: 6px;
+	/* 	padding: 0 0.5em; */
+}
+
+.navBarlogin {
+	background: #390;
+	font-size: 18px;
+	/* 	line-height: 200%; */
+	color: white;
+/* 	height: 38px; */
+/* 	padding-top: 3px; */
+	/* 	padding: 0 0.5em; */
+}
+
+.searchBar {
+	background: #4a0;
+	line-height: 200%;
+	color: white;
+	padding: 0 0.5em;
+}
+
+.listBox {
+	border: solid 1px #ccc;
+	border-radius: 5px;
+	margin: 10px autor;
+	padding: 5px;
+	font-size: 14px;
+}
+
+.listBox a {
+	text-decoration: none;
+	color: #000;
+}
+
+.greyText {
+	color: #999;
+	/* 	padding: 15px; */
+	font-size: 13px;
+	padding: 10px;
+}
+
+.greenText {
+	color: #360;
+	font-size: 13px;
+}
+
+.redText {
+	color: red;
+	font-size: 15x;
+}
+
+h1, h2, h3, h4 {
+	padding: 0;
+	margin: 0;
+}
+
+h3.h31 {
+	text-align: center;
+	padding: 1em;
+}
+
+h3.h32 {
+	padding: 1em;
+}
+
+.m10 {
+	margin: 5px;
+}
+
+.seperator {
+	border: none;
+	border-top: solid 1px #333
+}
+
+.card1 {
+	border: solid 1px #ccc;
+	border-radius: 5px;
+	margin: 15px auto;
+}
+
+.cardTitle {
+	background: #ddd;
+	line-height: 150%;
+}
+
+.card1 .cardLayer+.cardLayer {
+	border-top: solid 1px #ccc;
+}
+
+.bigBtn {
+	width: 120px;
+	padding: 10px;
+	text-align: center;
+	display: inline-block;
+	background: #390;
+	color: white;
+	border-radius: 5px;
+}
+
+.graybigBtn {
+	width: 120px;
+	padding: 10px;
+	text-align: center;
+	display: inline-block;
+	background: #ddd;
+	color: white;
+	border-radius: 5px;
+}
+
+.brandItem {
+	padding-top: 5px;
+	height: 38px;
+	background: url(../images/drawable-hdpi/right.png) no-repeat center right;
+	line-height: 30px;
+}
+
+.itemlist {
+	/* 	height: 30px; */
+	background: url(../images/drawable-hdpi/right.png) no-repeat center right;
+	/* 	line-height: 30px; */
+}
+
+.brandItem a {
+	text-decoration: none;
+	color: #000;
+}
+
+.brandItem+.brandItem {
+	border-top: solid 1px #ccc;
+}
+
+.loginCard {
+	background-color: #FFF;
+	border-radius: 5px;
+	margin: 3px;
+	padding: 1em;
+	text-align: left;
+}
+
+.curProc {
+	border: solid 2px #ccc;
+	border-radius: 10px;
+	padding: 2px 10px;
+	display: table-cell;
+	width: 2em;
+	text-align: center;
+	font-size: 14px;
+}
+
+.curProcActive {
+	border: solid 2px green;
+	border-radius: 10px;
+	padding: 2px 10px;
+	display: table-cell;
+	width: 2em;
+	text-align: center;
+	font-size: 14px;
+}
+
+.procSeperator {
+	display: table-cell;
+}
+
+table {
+	display: table;
+	border-collapse: separate;
+	border-spacing: 2px;
+	border-color: gray;
+}
+
+.procSeperator div {
+	height: 10px;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+	border-bottom: solid 1px green;
+}
+
+.tejia {
+	top: 0px;
+	width: 40px;
+	height: 40px;
+	background: url(../images/drawable-hdpi/tejia.png) no-repeat 0 0;
+	background-size: 40px 40px;
+}
+
+.yearItem {
+	height: 38px;
+	line-height: 30px;
+}
+
+.yearItem a {
+	text-decoration: none;
+	color: #000;
+}
+
+.yearItem+.yearItem {
+	border-top: solid 1px #ccc;
+}

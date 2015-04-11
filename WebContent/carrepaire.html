@@ -1,0 +1,122 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width,height=device-height,initial-scale=1, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>车大邦</title>
+<link href="css/jquery.mobile-1.3.2.css" rel="stylesheet" type="text/css"/>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/jquery.mobile-1.3.2.js" type="text/javascript"></script>
+</head>
+<body>
+	<div data-role="page" id="carpairepage">
+		<div data-role="header" data-position="fixed" data-theme="b">
+			<a data-transition="slide" data-direction="reverse"
+				data-role="button" data-icon="arrow-l" data-iconpos="left" href="#"
+				data-rel="back" data-inline="true">返回</a>
+			<h1>汽车中立检测</h1>
+		</div>
+		<div data-role="content">
+
+			<div class="card1">
+				<div class="cardTitle tact">选择车型</div>
+				<div class=" m10">
+						<div class="cardLayer" id="selectedcar1">
+						</div>
+					<div class="cardLayer" style="padding-top: 10px;" id="selectedcar2">
+						<table width="100%" class="layoutTbl">
+							<tr>
+								<td>&nbsp;<span class="greyText">选择车型，查看可做的项目</span></td>
+								<td width="80" style="text-align: right;"><a
+											data-role="button" href="javascript:querybrand(1);">选择车型</a></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="card1" id="paireservicelist">
+			</div>
+			<div class="listBox">
+				<p>以中立机构的身份来为车辆做检查，并提供一份客观的检测报告，不在忽悠车主过度消费，真正让你了解什么需要换，什么不需要换</p>
+				<p>目前我们正在研制详细检测项目，不久开通服务。</p>
+			</div>
+
+			<div class="m10">
+				<div class="greyText">在车大邦平台上网，如出现任何问题，车大邦负责协调解决。</div>
+			</div>
+		</div>
+		<div data-role="footer" data-position="fixed" data-theme="b">
+			<h4>车大邦</h4>
+		</div>
+		<link href="css/main.css" rel="stylesheet" type="text/css" />
+		<script src="js/common.js" type="text/javascript"></script>
+		<script>
+		$("#carpairepage").on("pageshow",function(){
+			//if (navigator.userAgent.indexOf("Android") != -1) {
+				//$.mobile.defaultPageTransition = 'none';
+				//$.mobile.defaultDialogTransition = 'none';
+			//}
+			showLoadMsg();
+		    var url = "queryChoosedCarItemByUser.do?userId="+window.localStorage.carName+"&classId="+sessionStorage.classId;
+		    ajaxGet(url,function(data){
+		    	 if(data.length > 0){
+		    		 var obj = data[0];
+		    		 $("#selectedcar1").html(obj.name);
+		    		 queryservice(obj.id);
+		    	 }
+		    });
+	    });
+	    function queryservice(carId){
+	    	var url = "queryServiceList.do?serviceClassId="+sessionStorage.classId+"&carId="+carId;
+		    ajaxGet(url,function(data){
+		    	   var temp = [];
+		    	   temp.push('<div class="cardTitle tact">可选项目</div>');
+				   if(data.length > 0){
+					   for(var key in data){
+						   var obj = data[key];
+					       temp.push('<div class="cardLayer">');
+					       temp.push('<div class="m10">');
+					       temp.push('<a href="javascript:queryservicedetail(\''+obj.serviceId+'\')" style="color: #000; text-decoration: none;">'+obj.name);
+					       temp.push('<table width="100%">');
+					       if(obj.item1ClassTxt!=null&&obj.item1ClassTxt!=''&&obj.item1ClassTxt!='null'){
+					    	   temp.push('<tr><td><span class="greyText" style="padding: 0px;">'+obj.item1ClassTxt+'</span></td><td></td><td></td></tr>');  
+					       }
+					       if(obj.item2ClassTxt!=null&&obj.item2ClassTxt!=''&&obj.item2ClassTxt!='null'){
+					    	   temp.push('<tr><td><span class="greyText" style="padding: 0px;">'+obj.item2ClassTxt+'</span></td><td></td><td></td></tr>');  
+					       }
+					       if(obj.item3ClassTxt!=null&&obj.item3ClassTxt!=''&&obj.item3ClassTxt!='null'){
+					    	   temp.push('<tr><td><span class="greyText" style="padding: 0px;">'+obj.item3ClassTxt+'</span></td><td></td><td></td></tr>');  
+					       }
+					       if(obj.item4ClassTxt!=null&&obj.item4ClassTxt!=''&&obj.item4ClassTxt!='null'){
+					    	   temp.push('<tr><td><span class="greyText" style="padding: 0px;">'+obj.item4ClassTxt+'</span></td><td></td><td></td></tr>');  
+					       }
+					       temp.push('<tr><td class="redText">￥'+obj.priceOnline+'元</td><td></td><td></td></tr>');
+					       temp.push('</table>');
+					       temp.push('</a>')
+					       temp.push('</div>');
+					       temp.push('</div>');
+					   }
+					  
+				   }else{
+					   temp.push('<div class="cardLayer"><div class="m10"><span class="greyText">该车型没有可选项目</span></div></div>');
+				   }
+				   $('#paireservicelist').html(temp.join(""));
+				   hideLoadMsg();
+		    });
+	    }
+		function queryservicedetail(serviceid){
+			sessionStorage.serviceid=serviceid;
+			onTargetPage("maintainitems.html","slide",false);
+		}
+		function querybrand(){
+			onTargetPage("carbrandlist.html","slide",false);
+		}
+		</script>
+	</div>
+	
+</body>
+</html>

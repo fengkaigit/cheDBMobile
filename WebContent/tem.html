@@ -1,0 +1,395 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width,height=device-height,initial-scale=1, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>车大邦</title>
+<link href="css/jquery.mobile-1.3.2.css" rel="stylesheet" type="text/css"/>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/jquery.mobile-1.3.2.js" type="text/javascript"></script>
+</head>
+<body>
+	<div data-role="page" id="mainitempage">
+	    <div data-role="header" data-position="fixed" data-theme="b">
+			<a data-transition="slide" data-direction="reverse"
+				data-role="button" data-icon="arrow-l" data-iconpos="left" href="#"
+				data-rel="back" data-inline="true">&lt;保养</a>
+		<h1></h1>
+		</div>
+		<div data-role="content">
+		<div style="padding-left: 5px; padding-right: 5px;">
+			<table class="layoutTbl" width="100%">
+				<tr>
+					<td>
+						<h3 class="h32" id="serviceName">
+						</h3>
+					</td>
+					<td style="width: 90px;" id="tejiaTd"></td>
+				</tr>
+			</table>
+
+			<div class="m10">
+				<table class="layoutTbl" width="100%">
+					<tr>
+						<td  style="width:120px" id="priceOnline"><span class="redText tart"
+							style="font-size: 15px;">
+						</span>
+						</td>
+						<td id="businessNum" class="tart" style="text-align: right;">已售<c:out
+								value="${modelService.businessNum}" />
+						</td>
+					</tr>
+					<tr>
+						<td style="width: 120px;"><div class="greyText"
+								style="font-size: 15px; width: 90px;" id="returnJifengOnline">
+								反<c:out value="${modelService.returnJifenOnline}" />积分
+							</div></td>
+						<td style="text-align: right;">
+							<div class="greyText" style="font-size: 15px;" id="priceJifen">
+								积分抵付需<c:out value="${modelService.priceJifen}" />
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div id="highlife"></div>
+			<c:if test="${serviceClassId!=01}">
+				<c:if test="${modelService.rawUrlPath!=null}">
+					<a href="<c:out value="${modelService.rawUrlPath}" />"
+						style="text-decoration: none;">
+				</c:if>
+				<c:if test="${modelService.rawUrlPath==null}">
+					<a href="#" style="text-decoration: none;">
+				</c:if>
+				<c:if test="${modelService.hasRaw==1}">
+					<div class="card1">
+						<div class="cardTitle tact" style="color: #000;">高品质原料</div>
+						<div class="m10" style="color: #000;">
+							<c:if test="${modelService.item1ClassTxt!=null}">
+					        【<c:out value="${modelService.item1ClassTxt}" />】 <c:out
+									value="${modelService.item1Txt}" />
+								<br>
+							</c:if>
+							<c:if test="${modelService.item2ClassTxt!=null}">
+					        【<c:out value="${modelService.item2ClassTxt}" />】 <c:out
+									value="${modelService.item2Txt}" />
+								<br>
+							</c:if>
+							<c:if test="${modelService.item3ClassTxt!=null}">
+					        【<c:out value="${modelService.item3ClassTxt}" />】 <c:out
+									value="${modelService.item3Txt}" />
+								<br>
+							</c:if>
+							<c:if test="${modelService.item4ClassTxt!=null}">
+					        【<c:out value="${modelService.item4ClassTxt}" />】 <c:out
+									value="${modelService.item4Txt}" />
+								<br>
+							</c:if>
+						</div>
+						<div class="itemlist greyText" style="height: 20px;">集中采购统一配送，品质高价格低</div>
+					</div>
+				</c:if>
+				</a>
+			</c:if>
+			<c:if test="${modelService.workUrlPath!=null}">
+				<a href="<c:out value="${modelService.workUrlPath}" />"
+					style="text-decoration: none;">
+			</c:if>
+			<c:if test="${modelService.workUrlPath==null}">
+				<a href="#" style="text-decoration: none;">
+			</c:if>
+
+			<div class="card1">
+				<div class="cardTitle tact" style="color: #000;">严谨的工序</div>
+				<div class="m10" style="color: #000;" id="workflow">
+					
+				</div>
+				<div class="itemlist greyText">商家操作工序有误可投诉</div>
+			</div>
+			</a>
+			<div class="card1">
+				<div class="cardTitle tact">认证商家</div>
+				<c:forEach items="${providers}" var="modelProvider"
+					varStatus="status">
+					<div class="cardLayer">
+						<div class=" m10">
+							<table class="layoutTbl" width="100%">
+								<tr>
+									<td width="100" class="tact"><c:if
+											test="${modelProvider.imgIdListStr==''}">
+											<img src="img/ic_launcher.png" width="100" height="100" />
+										</c:if> <c:if test="${modelProvider.imgIdListStr!=''}">
+											<a
+												href="provider/providerimglist.do?providerId=<c:out
+										value="${modelProvider.providerId}" />">
+												<img
+												src="img/provider/<c:out
+										value="${modelProvider.providerId}" />/<c:out value="${modelProvider.defaultimg}" />.jpg"
+												width="120" height="120" />
+											</a>
+										</c:if></td>
+									<td valign="top">
+										<div style="width: 100%;">
+											<a
+												href="provider/providerdetail.do?providerId=<c:out
+										value="${modelProvider.providerId}" />"
+												style="text-decoration: none; color: #000;"> <c:out
+													value="${modelProvider.title}" /> <br /> <span
+												class="greyText"> <c:out
+														value="${modelProvider.addr}" /> <br />
+											</span>
+											</a>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="tact"><input type="checkbox" name="checkedbox"
+										onchange="javascript:selectprovider(this,'<c:out value="${modelProvider.providerId}" />','<c:out value="${modelService.priceOnline}" />','<c:out value="${modelService.priceJifen}" />','<c:out value="${modelService.returnJifenOnline}" />');"
+										style="zoom: 180%;" /></td>
+									<td style="text-align: left;"><span class="redText">
+
+											<c:out value="${modelProvider.score}" />分/<c:out
+												value="${modelProvider.scoreCount}" />人打分
+									</span></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</c:forEach>
+				<div class="cardLayer tart " id="providerlist">
+					<table width="100%" class="layoutTbl">
+						<tbody>
+							<tr>
+								<td></td>
+								<td width="140" style="text-align: right;">&nbsp;<span
+									class="greyText"><c:out value="${providercount}" />/共<c:out
+											value="${totalprovidercount}" />家</span></td>
+								<td width="80" style="text-align: right;">
+									<button class="greenBtn"
+										onclick="javascript:pagequeryprovider();">下一页</button> <input
+									type="hidden" name="start" id="start"
+									value="<c:out value="${start}" />"> <input
+									type="hidden" name="count" id="count"
+									value="<c:out value="${count}" />">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<input type="hidden" name="serviceId" id="serviceId"
+				value="<c:out value="${serviceId}" />"> <input type="hidden"
+				name="serviceClassId" id="serviceClassId"
+				value="<c:out value="${serviceClassId}" />"> <input
+				type="hidden" name="userId" id="userId"
+				value="<c:out value="${userId}" />">
+				 <input
+				type="hidden" name="usertype" id="usertype"
+				value="<c:out value="${usertype}" />">
+				 <input type="hidden"
+				name="price" id="price"> <input type="hidden"
+				name="priceJifen" id="priceJifen"> <input type="hidden"
+				name="returnJifen" id="returnJifen"> <input type="hidden"
+				name="providerId" id="providerId">
+			<div class="m10">
+				<table class="layoutTbl" width="100%">
+					<c:if test="${modelService.allowOnline==1}">
+						<tr>
+							<td width="100%" class="tart">
+
+								<div class=" bigBtn" style="width: 100%; padding: 0px;"
+									onclick="javascript:showmess(1);">
+									<h3>在线支付</h3>
+									<span style="font-size: small">服务前可随时取消</span>
+								</div>
+
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${modelService.allowOnline==0}">
+						<tr>
+							<td width="100%" class="tart">
+
+								<div class=" graybigBtn" style="width: 100%; padding: 0px;">
+									<h3>在线支付</h3>
+									<span style="font-size: small">服务前可随时取消</span>
+								</div>
+
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${modelService.allowXianjin==1}">
+						<tr>
+							<td width="100%"><div class=" bigBtn"
+									style="width: 100%; padding: 0px;"
+									onclick="javascript:showmess(2);">
+									<h3>现金支付</h3>
+									<span style="font-size: small">直接将现金给商家</span>
+								</div></td>
+						</tr>
+					</c:if>
+					<c:if test="${modelService.allowXianjin==0}">
+						<tr>
+							<td width="100%"><div class=" graybigBtn"
+									style="width: 100%; padding: 0px;">
+									<h3>现金支付</h3>
+									<span style="font-size: small">直接将现金给商家</span>
+								</div></td>
+						</tr>
+					</c:if>
+					<c:if test="${modelService.allowJifen==1}">
+						<tr>
+							<td width="100%" class="tart">
+								<div class=" bigBtn" style="width: 100%; padding: 0px;"
+									onclick="javascript:showmess(3);">
+									<h3>积分抵付</h3>
+									<span style="font-size: small">用积分就不花钱</span>
+								</div>
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${modelService.allowJifen==0}">
+						<tr>
+							<td width="100%" class="tart">
+								<div class=" graybigBtn" style="width: 100%; padding: 0px;">
+									<h3>积分抵付</h3>
+									<span style="font-size: small">服务前可随时取消</span>
+								</div>
+							</td>
+						</tr>
+					</c:if>
+				</table>
+			</div>
+			<input type="hidden" name="ordertype" id="ordertype">
+			<div class="card1">
+				<div class="cardTitle tact">车主评价</div>
+				<div id="remarks">
+					<c:forEach items="${apprsises}" var="modelUserAppraise"
+						varStatus="status">
+						<div class="cardLayer">
+							<div class="m10">
+								<div class=" greenText" style="font-size: 15px;">
+									<c:out value="${modelUserAppraise.userName}" />
+								</div>
+								<div style="font-size: 14px;">
+									<c:out value="${modelUserAppraise.appraise}" />
+								</div>
+								<div class=" tart greyText" style="text-align: right;">
+									<c:out value="${modelUserAppraise.dateStr}" />
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+				<div class="cardLayer">
+					<table class="layoutTbl" width="100%">
+						<tr>
+							<td><button class="greenBtn"
+									onclick="javascript:showcommentdiv();">说两句</button></td>
+							<td style="text-align: right; width: 120px;"><input
+								type="hidden" name="appriseindex" id="appriseindex"
+								value="<c:out value="${appriseindex}" />"> <input
+								type="hidden" name="pagecount" id="pagecount"
+								value="<c:out value="${pagecount}" />"> <input
+								type="hidden" name="rowcoount" id="rowcoount"
+								value="<c:out value="${rowcoount}" />"> <span
+								class="greyText" id="apppagebar"> <c:out
+										value="${appriseindex}" /> /共<c:out value="${rowcoount}" />条
+							</span></td>
+							<td width="80" style="text-align: right;"><c:if
+									test="${endpage==1}">
+									<button class="greenBtn">已全部</button>
+								</c:if> <c:if test="${endpage==0}">
+									<button class="greenBtn"
+										onclick="javascript:pagingqueryapprise(<c:out value="${nextpage}" />);">下一页</button>
+								</c:if></td>
+
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div style="width: 100%; padding-left: 10px; display: none;"
+				id="commentdiv">
+				<div style="float: left;">
+					<textarea rows="2" value="" id="comment"></textarea>
+				</div>
+				<div style="float: left; padding-left: 10px; padding-top: 10px;">
+					<button class="greenBtn" style="width: 70px;"
+						onclick="javascript:sendcomment();">发送</button>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div data-role="footer" data-position="fixed" data-theme="b">
+			<h4>车大邦</h4>
+		</div>
+	   <link href="css/main.css" rel="stylesheet" type="text/css" />
+		<script src="js/common.js" type="text/javascript"></script>		
+		<script>
+			$("#mainitempage").on("pageshow",function(){
+				//if (navigator.userAgent.indexOf("Android") != -1) {
+					//$.mobile.defaultPageTransition = 'none';
+					//$.mobile.defaultDialogTransition = 'none';
+				//}
+				showLoadMsg();
+			    var url = "queryServiceInfo.do?serviceId="+sessionStorage.serviceid;
+			    ajaxGet(url,function(data){
+			    	 if(data!=null){
+			             $("#serviceName").html(data.name);
+			             if(data.preferential==1){
+			            	 $("#tejiaTd").html('<div class="tejia"></div>');
+			             }
+			             $("#priceOnline span").html('￥');
+			                  
+			    	 }
+			    });
+		    });
+		
+	    function queryservice(carId){
+	    	var url = "queryServiceList.do?serviceClassId="+sessionStorage.classId+"&carId="+carId;
+		    ajaxGet(url,function(data){
+		    	   var temp = [];
+		    	   temp.push('<div class="cardTitle tact">可选项目</div>');
+				   if(data.length > 0){
+					   for(var key in data){
+						   var obj = data[key];
+					       temp.push('<div class="cardLayer">');
+					       temp.push('<div class="m10">');
+					       temp.push('<a href="javascript:queryservicedetail('+obj.serviceId+')" style="color: #000; text-decoration: none;"><div class="brandItem">'+obj.name+'</div>');
+					       temp.push('<table width="100%">');
+					       if(obj.item1ClassTxt!=null&&obj.item1ClassTxt!=''&&obj.item1ClassTxt!='null'){
+					    	   temp.push('<tr><td><span class="greyText" style="padding: 0px;">'+obj.item1ClassTxt+'</span></td><td></td><td></td></tr>');  
+					       }
+					       if(obj.item2ClassTxt!=null&&obj.item2ClassTxt!=''&&obj.item2ClassTxt!='null'){
+					    	   temp.push('<tr><td><span class="greyText" style="padding: 0px;">'+obj.item2ClassTxt+'</span></td><td></td><td></td></tr>');  
+					       }
+					       if(obj.item3ClassTxt!=null&&obj.item3ClassTxt!=''&&obj.item3ClassTxt!='null'){
+					    	   temp.push('<tr><td><span class="greyText" style="padding: 0px;">'+obj.item3ClassTxt+'</span></td><td></td><td></td></tr>');  
+					       }
+					       if(obj.item4ClassTxt!=null&&obj.item4ClassTxt!=''&&obj.item4ClassTxt!='null'){
+					    	   temp.push('<tr><td><span class="greyText" style="padding: 0px;">'+obj.item4ClassTxt+'</span></td><td></td><td></td></tr>');  
+					       }
+					       temp.push('<tr><td><span class="redText">￥'+obj.priceOnline+'元</span><del>￥'+obj.priceOld+'元</del></td><td></td><td></td></tr>');
+					       temp.push('</table>');
+					       temp.push('</a>')
+					       temp.push('</div>');
+					       temp.push('</div>');
+					   }
+					  
+				   }else{
+					   temp.push('<div class="cardLayer"><div class="m10"><span class="greyText">该车型没有可选项目</span></div></div>');
+				   }
+				 
+				   $('#carmainlist').html(temp.join(""));
+				   //$('#tyreservicelist').trigger('create');
+				   hideLoadMsg();
+		    });
+	    }
+		
+		</script>
+	</div>
+</body>
+</html>
