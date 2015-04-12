@@ -15,7 +15,7 @@
 		$.ajax({
 			type: "POST",
 			async: false,
-			url: "http://localhost:8080/cheDBService/getUserNewNo.do?type=1",
+			url: window.localStorage.serverUrl+"getUserNewNo.do?type=1",
 			dataType:"jsonp",
 			jsonp:"callback",
 			jsonpCallback:"call",
@@ -42,7 +42,7 @@
 		userInfo.no = appId;
 		userInfo.level = 1;
 		var userInfoStr = JSON.stringify(userInfo);
-		var url="http://localhost:8080/cheDBService/registerUser.do?appId="+appId+"&userInfo="+userInfoStr+"&callback=call";
+		var url=window.localStorage.serverUrl+"registerUser.do?appId="+appId+"&userInfo="+userInfoStr+"&callback=call";
 		$.ajax({
 			type: "POST",
 			async: false,
@@ -65,7 +65,7 @@
 		$.ajax({
 			type: "POST",
 			async: false,
-			url: "http://localhost:8080/cheDBService/getUserNewNo.do?type=1",
+			url: window.localStorage.serverUrl+"getUserNewNo.do?type=1",
 			dataType:"jsonp",
 			jsonp:"callback",
 			jsonpCallback:"call",

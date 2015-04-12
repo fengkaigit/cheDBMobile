@@ -13,25 +13,6 @@
 </head> 
 <body>
 <div data-role="page" id="page" >
-	<div data-role="header" data-theme="b" data-position="fixed">
-		<h1 style="text-align:left;">车大邦</h1>
-        <h4 style="text-align:left;">养车从此无烦恼</h4>
-	</div>
-    <div class="page-content">
-        <h1></h1>
-    </div>
-    <br>
-    <br>
-    <br>
-    <div class="ui-grid-b" >
-        <div class="ui-block-a"><a data-transition="slide" style="background-color:#FF6073; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#" data-transition="slide"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/find_provider.png"/>查询息</a></div>
-        <div class="ui-block-b"><a data-transition="slide" style="background-color:#3D98FF; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#"onclick="myCheck('carclean.html','01')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/xiche.png" />洗车</a></div>
-        <div class="ui-block-c"><a data-transition="slide" style="background-color:#8A95FF; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#"onclick="myCheck('carmaintains.html','02')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/baoyang.png" />保养</a></div>
-        <div class="ui-block-a"><a data-transition="slide" style="background-color:#FF7081; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#"onclick="myCheck('carrepaire.html','03')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/luntai.png" />检测</a></div>
-        <div class="ui-block-b"><a data-transition="slide" style="background-color:#01BCE4; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#"onclick="myCheck('cartyre.html','04')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/car_check.png" />轮胎</a></div>
-        <div class="ui-block-c"><a id="myOrder" data-ajax="false" data-transition="slide" style="background-color:#82A8FF; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#" onclick="myCheck('myOrder.html')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/recordlist.png" data-inset="true"/>我的订单</a></div>
-    </div>
-    <a id="setting" data-transition="slide" style="margin-right:0.6em; float:right;" href="#" onclick="myCheck('setting.html')"><img src="images/drawable-hdpi/ofm_setting_icon.png"></a>
     <script src="js/main.js" type="text/javascript"></script>
     <script>
 //向SD卡中保存数据
@@ -43,7 +24,7 @@
 	 if(loginStatus&&loginStatus=="succ"){
 		 var name = window.localStorage.getItem("carName");
 		 var pwd = window.localStorage.getItem("carPwd");
-		var url = "http://192.168.1.101:8080/cheDBService/Login.do?userNo="+name+"&password="+pwd+"&type=1&callback=call";
+		var url = window.localStorage.serverUrl+"Login.do?userNo="+name+"&password="+pwd+"&type=1&callback=call";
 		$.ajax({
 			type: "POST",
 			async: false,
@@ -82,6 +63,25 @@
 		}
 	}
 </script>
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1 style="text-align:left;">车大邦</h1>
+        <h4 style="text-align:left;">养车从此无烦恼</h4>
+	</div>
+    <div class="page-content">
+        <h1></h1>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="ui-grid-b" >
+        <div class="ui-block-a"><a data-transition="slide" style="background-color:#FF6073; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#" data-transition="slide"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/find_provider.png"/>查询息</a></div>
+        <div class="ui-block-b"><a data-transition="slide" style="background-color:#3D98FF; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#"onclick="myCheck('carclean.html','01')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/xiche.png" />洗车</a></div>
+        <div class="ui-block-c"><a data-transition="slide" style="background-color:#8A95FF; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#"onclick="myCheck('carmaintains.html','02')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/baoyang.png" />保养</a></div>
+        <div class="ui-block-a"><a data-transition="slide" style="background-color:#FF7081; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#"onclick="myCheck('carrepaire.html','03')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/luntai.png" />检测</a></div>
+        <div class="ui-block-b"><a data-transition="slide" style="background-color:#01BCE4; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#"onclick="myCheck('cartyre.html','04')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/car_check.png" />轮胎</a></div>
+        <div class="ui-block-c"><a id="myOrder" data-ajax="false" data-transition="slide" style="background-color:#82A8FF; text-align:center; text-decoration:none; color:#FFF; font-weight:lighter; border:1px solid #3c3c3c; display:block; margin:5px;" href="#" onclick="myCheck('myOrder.html')"><img style="display:block; height:auto; width:100%;" src="images/drawable-hdpi/recordlist.png" data-inset="true"/>我的订单</a></div>
+    </div>
+    <a id="setting" data-transition="slide" style="margin-right:0.6em; float:right;" href="#" onclick="myCheck('setting.html')"><img src="images/drawable-hdpi/ofm_setting_icon.png"></a>
 </div>
 </body>
 </html>

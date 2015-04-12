@@ -19,7 +19,7 @@
 			generatedCount = 0;                  
 		$(document).on("pageinit",function(){
 				var name = window.localStorage.getItem("carName");
-				var url = "http://localhost:8080/cheDBService/queryBuynoteByUserId.do?userId="+name+"&page=0&callback=call";
+				var url = window.localStorage.serverUrl+"queryBuynoteByUserId.do?userId="+name+"&page=0&callback=call";
 				$.ajax({
 					type: "POST",
 					async: false,
@@ -322,7 +322,7 @@
 		function pullUpAction () {
 			setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
 				var name = window.localStorage.getItem("carName");
-				var url = "http://localhost:8080/cheDBService/queryBuynoteByUserId.do?userId="+name+"&page="+count+"&callback=call";
+				var url = window.localStorage.serverUrl+"queryBuynoteByUserId.do?userId="+name+"&page="+count+"&callback=call";
 				$.ajax({
 					type: "POST",
 					async: false,

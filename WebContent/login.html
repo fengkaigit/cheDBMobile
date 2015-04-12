@@ -27,7 +27,7 @@
 		//$('#login').attr('href','#page2');
 		var name = $('#userName').val();
 		var pwd = $('#passWd').val();
-		var url = "http://192.168.1.101:8080/cheDBService/Login.do?userNo="+name+"&password="+pwd+"&type=1&callback=call";
+		var url = window.localStorage.serverUrl+"Login.do?userNo="+name+"&password="+pwd+"&type=1&callback=call";
 		$.ajax({
 			type: "POST",
 			async: false,

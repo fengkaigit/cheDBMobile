@@ -9,40 +9,29 @@
 </head>
 <body>
 
-<div data-role="page" id="page">
-<script>	
+<div data-role="page" id="networkpage">
+<script>
+    $("#networkpage").on("pageshow",function(){
+	     if(window.localStorage&&window.localStorage.serverUrl){
+	    	 $('#netaddr').val(window.localStorage.serverUrl);
+	     }
+    });
 	function saveInfo(){
-		if($('#passWd1').val()==''){
-			alert("请输入旧密码");
+		if($('#netaddr').val()==''){
+			alert("请输入网络地址");
 			return false;
 		}
-		if($('#passWd2').val()==''){
-			alert("请输入新密码");
-			return false;
-		}
-		var userId=window.localStorage.getItem("carName");
-		var pwd = $('#passWd2').val();
-		$.ajax({
-			type: "POST",
-			async: false,
-			url: window.localStorage.serverUrl+"modifyUserInfo.do?userId="+userId+"&infoType=23&content="+pwd,
-			dataType:"jsonp",
-			jsonp:"callback",
-			jsonpCallback:"call",
-			success: function(json){
-			}
-		})
+		window.localStorage.serverUrl = $('#netaddr').val();
 	}
 </script> 
 	<div data-role="header" data-theme="b" data-position="fixed">
     	<a data-transition="slide" data-direction="reverse" data-role="button" data-icon="arrow-l" data-iconpos="left" href="#" data-rel="back" data-inline="true">返回</a>
-		<h1>修改密码</h1>
+		<h1>网络设置</h1>
         <a id="save" data-transition="slide" data-rel="back" data-role="button" href="#" data-inline="true" onClick="saveInfo();">保存</a>
 	</div>
 	<div data-role="content">	
 		<fieldset data-role="controlgroup" > 
-        	<input placeholder="旧密码" value="" type="password" id="passWd1" />
-            <input placeholder="新密码" type="password" id="passWd2"/>
+            <input placeholder="网络地址" type="text" id="netaddr"/>
         </fieldset>
 	</div>
 	<div data-role="footer" data-position="fixed">
